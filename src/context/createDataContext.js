@@ -27,13 +27,15 @@ export default (reducer, actions, initialState) => {
     // added little bit of fancy code here to allow helper functions in
     // other components to access dispatch to update state object
 
-    // boundActions is all our action objects
+    // boundActions is all our incoming action objects
     const boundActions = {};
     for (let key in actions) {
       // key === 'addUser' is action function 
       // boundActions[key] === addUser
-      // actions[key] or addUser === reference to { return () => {} } & calling it with dispatch
-      boundActions[key] = actions[key](dispatch);
+      // actions[key] or addUser === reference to { return () => {} } & 
+      // calling our action functions with dispatch
+      boundActions[key] = actions[key](dispatch); 
+      // dispatch is calling all our action functions in all different context object components
     }
 
     // { state, ...boundActions } is our state object & action objects by dispatch

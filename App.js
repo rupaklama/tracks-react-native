@@ -11,6 +11,9 @@ import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
 
+// import clever function
+import { setNavigator } from './src/navigationRef';
+
 // provider
 import { Provider as AuthProvider } from './src/context/AuthContext';
 
@@ -60,10 +63,14 @@ const App = createAppContainer(switchNavigator);
 // to add some code for extra functionalities
 export default () => {
   return (
+    // passing a prop call - ref
+    // ref is going to receive arrow func with arg - navigator which
+    // allow us navigate around & pass that into setNavigator func
     <AuthProvider>
-      <App />
+      <App ref={(navigator) => { setNavigator(navigator) }}/>
     </AuthProvider>
-  )
+  ) // ref is going to be a function which gets call with navigator object
+  // allows us to navigate around
 }
 // passing App as child to AuthProvider to share our context object
 // into all the children components with the help of createAppContainer's navigation
