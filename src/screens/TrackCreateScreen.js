@@ -1,8 +1,19 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+
+// this component makes our content fit into screen
+import { SafeAreaView } from 'react-navigation';
+import { StyleSheet } from 'react-native';
+import { Text } from 'react-native-elements';
+
+import Map from '../components/Map';
+
 const TrackCreateScreen = () => {
-  return (
-    <Text style={{ fontSize: 48 }}>TrackCreateScreen</Text>
+  return ( // forceInset - special prop with object
+    <SafeAreaView forceInset={{ top: 'always' }}>
+      <Text h2>Create a Track</Text>
+      <Map />
+    </SafeAreaView>
+    
   );
 };
 

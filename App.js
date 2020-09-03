@@ -10,6 +10,7 @@ import SignupScreen from './src/screens/SignupScreen';
 import TrackCreateScreen from './src/screens/TrackCreateScreen';
 import TrackDetailScreen from './src/screens/TrackDetailScreen';
 import TrackListScreen from './src/screens/TrackListScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 
 // import clever function
 import { setNavigator } from './src/navigationRef';
@@ -21,6 +22,9 @@ import { Provider as AuthProvider } from './src/context/AuthContext';
 const switchNavigator = createSwitchNavigator(
   {
     // first arg is the route config object
+
+    // default screen to display when app starts up
+    ResolveAuth: ResolveAuthScreen,
     
     // referring to another navigator object or grouping of screens
     // this will have a Stack navigator object to display
