@@ -15,8 +15,9 @@ import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 // import clever function
 import { setNavigator } from './src/navigationRef';
 
-// provider
+// providers
 import { Provider as AuthProvider } from './src/context/AuthContext';
+import { Provider as LocationProvider } from './src/context/LocationContext';
 
 // creating Switch navigator object to create routes
 const switchNavigator = createSwitchNavigator(
@@ -25,24 +26,23 @@ const switchNavigator = createSwitchNavigator(
 
     // default screen to display when app starts up
     ResolveAuth: ResolveAuthScreen,
-    
+
     // referring to another navigator object or grouping of screens
     // this will have a Stack navigator object to display
     // either SignupScreen or SignInScreen
     loginFlow: createStackNavigator({
       Signup: SignupScreen,
       SignIn: SignInScreen,
-      
     }),
     mainFlow: createBottomTabNavigator({
       trackListFlow: createStackNavigator({
         TrackList: TrackListScreen,
-        TrackDetail: TrackDetailScreen
+        TrackDetail: TrackDetailScreen,
       }),
       Account: AccountScreen,
       TrackCreate: TrackCreateScreen,
     }),
-  },
+  }
 
   // as second arg, passing another object
   // {
@@ -63,18 +63,24 @@ const switchNavigator = createSwitchNavigator(
 const App = createAppContainer(switchNavigator);
 
 // rather then directly exporting createAppContainer,
-// we wrapped it inside of our own custom component 
+// we wrapped it inside of our own custom component
 // to add some code for extra functionalities
 export default () => {
   return (
     // passing a prop call - ref
     // ref is going to receive arrow func with arg - navigator which
     // allow us navigate around & pass that into setNavigator func
-    <AuthProvider>
-      <App ref={(navigator) => { setNavigator(navigator) }}/>
-    </AuthProvider>
-  ) // ref is going to be a function which gets call with navigator object
+    <LocationProvider>
+      <AuthProvider>
+        <App
+          ref={navigator => {
+            setNavigator(navigator);
+          }}
+        />
+      </AuthProvider>
+    </LocationProvider>
+  ); // ref is going to be a function which gets call with navigator object
   // allows us to navigate around
-}
+};
 // passing App as child to AuthProvider to share our context object
 // into all the children components with the help of createAppContainer's navigation
